@@ -44,7 +44,7 @@ function App() {
       <Toaster position="top-right" />
       <div className="flex h-screen bg-gray-100">
         {isLoggedIn && (
-          <div className="lg:hidden">
+          <div className="absolute top-0 left-0 bg-white opacity-50 lg:hidden">
             <button onClick={toggleMobileMenu} className="p-4">
               <Bars3Icon className="h-6 w-6 text-gray-600" />
             </button>

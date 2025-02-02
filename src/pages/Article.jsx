@@ -79,7 +79,7 @@ function Article() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-8 overflow-y-auto ">
         {isEditing?
 					(
 						<div className="flex justify-between items-center">
@@ -104,7 +104,6 @@ function Article() {
           </button>
 						</div>
 						)}
-
 
 			
       {isEditing ? (

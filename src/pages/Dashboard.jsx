@@ -85,7 +85,7 @@ function Dashboard({ selectedCategory, selectedNotebook }) {
   };
 
   return (
-    <div className="flex-1 p-8 overflow-y-auto">
+    <div className="flex-1 p-4 overflow-y-auto">
       {selectedCategory ? (
         <div>
           <div className="flex justify-between items-center mb-6">

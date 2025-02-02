@@ -8,11 +8,13 @@ import Article from './pages/Article';
 import PrivateRoute from './components/PrivateRoute';
 import Sidebar from './components/Sidebar';
 import NewArticle from './pages/NewArticle';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedNotebook, setSelectedNotebook] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -21,6 +23,7 @@ function App() {
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
+    setIsMobileMenuOpen(false);
   };
 
   const handleLoginSuccess = () => {
@@ -32,20 +35,47 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <Router>
       <Toaster position="top-right" />
       <div className="flex h-screen bg-gray-100">
         {isLoggedIn && (
-          <Sidebar
-            onCategorySelect={handleCategorySelect}
-            selectedNotebook={selectedNotebook}
-            setSelectedNotebook={setSelectedNotebook}
-            selectedCategory={selectedCategory}
-            onLogout={handleLogout}
-          />
+          <div className="lg:hidden">
+            <button onClick={toggleMobileMenu} className="p-4">
+              <Bars3Icon className="h-6 w-6 text-gray-600" />
+            </button>
+          </div>
         )}
-        <div className="flex-1 flex flex-col overflow-hidden">
+        {isLoggedIn && (
+          <div
+            className={`fixed z-40 inset-y-0 left-0 w-64 transition duration-300 transform ${
+              isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+            } lg:translate-x-0 lg:static lg:inset-0 bg-white shadow-md`}
+          >
+            <div className="p-4 flex justify-between items-center">
+              <h1 className="text-xl font-bold text-gray-800">Knowledge Base</h1>
+              <button onClick={toggleMobileMenu} className="lg:hidden">
+                <XMarkIcon className="h-6 w-6 text-gray-600" />
+              </button>
+            </div>
+            <Sidebar
+              onCategorySelect={handleCategorySelect}
+              selectedNotebook={selectedNotebook}
+              setSelectedNotebook={setSelectedNotebook}
+              selectedCategory={selectedCategory}
+              onLogout={handleLogout}
+            />
+          </div>
+        )}
+        <div
+          className={`flex-1 flex flex-col overflow-hidden ${
+            isLoggedIn ? 'lg:ml-2' : ''
+          }`}
+        >
           <Routes>
             <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
             <Route path="/register" element={<Register />} />

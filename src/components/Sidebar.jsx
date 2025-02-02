@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu } from '@headlessui/react';
-import { PlusIcon, ChevronDownIcon, ChevronRightIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, ChevronDownIcon, ChevronRightIcon, PencilIcon, TrashIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { getNotebooks, createNotebook, getCategories, createCategory, updateCategory, deleteCategory } from '../services/api';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +20,7 @@ function Sidebar({ onCategorySelect, selectedNotebook, setSelectedNotebook, sele
   const [newCategoryParentId, setNewCategoryParentId] = useState(null);
   const [categoryToEdit, setCategoryToEdit] = useState(null);
   const [categoryToDelete, setCategoryToDelete] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -165,6 +166,10 @@ function Sidebar({ onCategorySelect, selectedNotebook, setSelectedNotebook, sele
     setCategoryToDelete(null);
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   const renderCategories = (parentId = null) => {
     const categoryItems = categories.filter(category => category.parent === parentId);
 
@@ -215,9 +220,12 @@ function Sidebar({ onCategorySelect, selectedNotebook, setSelectedNotebook, sele
 
   return (
     <div className="w-64 bg-white shadow-md flex flex-col">
-      <div className="p-4">
+      {/* <div className="p-4 flex justify-between items-center">
         <h1 className="text-xl font-bold text-gray-800">Knowledge Base</h1>
-      </div>
+        <button onClick={toggleMobileMenu} className="lg:hidden">
+          <XMarkIcon className="h-6 w-6 text-gray-600" />
+        </button>
+      </div> */}
 
       <div className="p-4">
         <Menu as="div" className="relative">

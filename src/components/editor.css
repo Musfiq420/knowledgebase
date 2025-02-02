@@ -1,0 +1,33 @@
+.ce-header {
+    font-weight: bold;
+    
+    margin: 1em 0;
+  }
+  
+  .ce-header h1 {
+    font-size: 32px;
+  }
+  
+  .ce-header h2 {
+    font-size: 20px;
+  }
+  
+  .ce-header h3 {
+    font-size: 1.75em;
+  }
+  
+  .ce-header h4 {
+    font-size: 1.5em;
+  }
+  
+  .ce-header h5 {
+    font-size: 1.25em;
+  }
+  
+  .ce-header h6 {
+    font-size: 1em;
+  }
+
+  .ce-code textarea {
+    min-height: auto;
+  }

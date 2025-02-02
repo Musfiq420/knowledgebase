@@ -52,7 +52,7 @@ function App() {
         )}
         {isLoggedIn && (
           <div
-            className={`fixed z-40 inset-y-0 left-0 w-64 transition duration-300 transform ${
+            className={`fixed z-0 inset-y-0 left-0 w-64 transition duration-300 transform ${
               isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
             } lg:translate-x-0 lg:static lg:inset-0 bg-white shadow-md`}
           >

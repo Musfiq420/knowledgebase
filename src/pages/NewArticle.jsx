@@ -31,7 +31,7 @@ function NewArticle({ selectedCategory, selectedNotebook }) {
 
   return (
     <div className="py-4 overflow-y-auto ">
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className=" p-6 rounded-lg ">
         <form onSubmit={handleAddArticle}>
           <input
             type="text"

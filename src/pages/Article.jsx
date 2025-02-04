@@ -79,7 +79,7 @@ function Article() {
   }
 
   return (
-    <div className="p-8 overflow-y-auto ">
+    <div className="p-8 overflow-y-auto h-full ">
         {isEditing?
 					(
 						<div className="flex justify-between items-center">

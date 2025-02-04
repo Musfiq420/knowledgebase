@@ -1,33 +1,48 @@
-.ce-header {
-    font-weight: bold;
-    
-    margin: 1em 0;
-  }
-  
-  .ce-header h1 {
-    font-size: 32px;
-  }
-  
-  .ce-header h2 {
-    font-size: 20px;
-  }
-  
-  .ce-header h3 {
-    font-size: 1.75em;
-  }
-  
-  .ce-header h4 {
-    font-size: 1.5em;
-  }
-  
-  .ce-header h5 {
-    font-size: 1.25em;
-  }
-  
-  .ce-header h6 {
-    font-size: 1em;
-  }
+ 
+  h1 {
+    font-size: 36px !important;
+    font-weight: bold !important;
+}
+
+h2 {
+    font-size: 32px !important;
+    font-weight: bold !important;
+}
+
+h3 {
+    font-size: 28px !important;
+    font-weight: bold !important;
+}
+
+h4 {
+    font-size: 24px !important;
+    font-weight: bold !important;
+}
+
+h5 {
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+
+h6 {
+    font-size: 16px !important;
+    font-weight: bold !important;
+}
+
 
   .ce-code textarea {
     min-height: auto;
   }
+
+  .ce-toolbar__content {
+    margin-left: 30px;
+  }
+
+  .ce-block__content {
+    margin-left: 30px;
+  }
+
+  /* .ce-toolbar {
+    top: 0 !important; 
+    margin-top: 6px;
+} */

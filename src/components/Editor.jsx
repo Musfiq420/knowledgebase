@@ -10,7 +10,36 @@ import Delimiter from '@editorjs/delimiter';
 import Marker from '@editorjs/marker';
 import InlineCode from '@editorjs/inline-code';
 import Table from '@editorjs/table';
+import LinkTool from '@editorjs/link';
 import './editor.css';
+import LinkPreviewTool from './LinkPreview';
+
+const fetchLinkPreview = async (url) => {
+  try {
+    console.log(url);
+    const response = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}`);
+    const data = await response.json();
+
+    if (data.status === "success") {
+      return {
+        success: 1,
+        link: url,
+        meta: {
+          title: data.data.title || "No title available",
+          description: data.data.description || "",
+          image: {
+            url: data.data.image?.url || ""
+          }
+        }
+      };
+    } else {
+      return { success: 0 };
+    }
+  } catch (error) {
+    console.error("Microlink fetch error:", error);
+    return { success: 0 };
+  }
+};
 
 const tools = {
   header: {
@@ -41,7 +70,17 @@ const tools = {
             };
             reader.readAsDataURL(file);
           });
-        }
+        },
+        uploadByUrl(url) {
+          return new Promise((resolve) => {
+            resolve({
+              success: 1,
+              file: {
+                url: url,
+              },
+            });
+          });
+        },
       }
     }
   },
@@ -81,7 +120,10 @@ const tools = {
       rows: 2,
       cols: 3
     }
-  }
+  },
+  linkPreview: {
+    class: LinkPreviewTool,
+  },
 };
 
 function Editor({ data, onChange, readOnly = false }) {

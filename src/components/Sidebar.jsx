@@ -317,7 +317,10 @@ function Sidebar({ onCategorySelect, selectedNotebook, setSelectedNotebook, sele
       </div>
 
       {/* Modal for adding a new category */}
-      <Modal isOpen={showAddCategoryModal} onClose={closeAddCategoryModal}>
+      
+      {/* <Modal isOpen={showAddCategoryModal} onClose={closeAddCategoryModal}> */}
+      {showAddCategoryModal?
+        <div style={{position:"absolute", zIndex:100, backgroundColor:"white", width:'100%', height:"100vh", padding:"10px"}}>
         <h3 className="text-lg font-medium text-gray-900">Add New Category</h3>
         <form onSubmit={handleAddCategory} className="mt-4">
           <input
@@ -344,10 +347,15 @@ function Sidebar({ onCategorySelect, selectedNotebook, setSelectedNotebook, sele
             </button>
           </div>
         </form>
-      </Modal>
+        </div>
+        :<></>
+      }
+      {/* </Modal> */}
 
       {/* Modal for editing a category */}
-      <Modal isOpen={showEditCategoryModal} onClose={closeEditCategoryModal}>
+      {/* <Modal isOpen={showEditCategoryModal} onClose={closeEditCategoryModal}> */}
+      {showEditCategoryModal?
+        <div style={{position:"absolute", zIndex:100, backgroundColor:"white", width:'100%', height:"100vh", padding:"10px"}}>
         <h3 className="text-lg font-medium text-gray-900">Edit Category</h3>
         <form onSubmit={handleUpdateCategory} className="mt-4">
           <input
@@ -374,10 +382,14 @@ function Sidebar({ onCategorySelect, selectedNotebook, setSelectedNotebook, sele
             </button>
           </div>
         </form>
-      </Modal>
+        </div>:<></>}
+      
+      {/* // </Modal> */}
 
       {/* Modal for deleting a category */}
-      <Modal isOpen={showDeleteCategoryModal} onClose={closeDeleteCategoryModal}>
+      {/* <Modal isOpen={showDeleteCategoryModal} onClose={closeDeleteCategoryModal}> */}
+      {showDeleteCategoryModal?
+        <div style={{position:"absolute", zIndex:100, backgroundColor:"white", width:'100%', height:"100vh", padding:"10px"}}>
         <h3 className="text-lg font-medium text-gray-900">Confirm Delete</h3>
         <div className="mt-2">
           <p className="text-sm text-gray-500">
@@ -398,7 +410,9 @@ function Sidebar({ onCategorySelect, selectedNotebook, setSelectedNotebook, sele
             Delete
           </button>
         </div>
-      </Modal>
+        </div>:<></>
+        }
+      {/* </Modal> */}
 
       <div className="p-4">
         <button

@@ -140,6 +140,52 @@ function Editor({ data, onChange, readOnly = false }) {
         onChange: async () => {
           const content = await editor.save();
           onChange?.(content);
+        },
+        onReady: () => {
+          const editorElement = editorRef.current;
+let lastTyped = ""; // To track the last two characters
+
+editorElement.addEventListener("input", (event) => {
+  lastTyped += event.data || ""; // Get the last typed character
+
+  if (lastTyped.endsWith(">>")) {
+    event.preventDefault(); // Prevent default input behavior
+
+    console.log("cli");
+
+    // Get selection and range
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+
+      // Move range back 2 characters to delete '>>'
+      range.setStart(range.startContainer, range.startOffset - 2);
+      range.deleteContents();
+
+      // Insert a line break
+      const br = document.createElement("br");
+      range.insertNode(br);
+
+      // Create another <br> to mimic Enter key behavior
+      const secondBr = document.createElement("br");
+      range.insertNode(secondBr);
+
+      // Move cursor after the new line
+      range.setStartAfter(secondBr);
+      range.collapse(true);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    lastTyped = ""; // Reset tracker
+  } else if (lastTyped.length > 2) {
+    lastTyped = lastTyped.slice(-2); // Keep only the last two characters
+  }
+});
+
+
+
+
         }
       });
 
@@ -166,7 +212,7 @@ function Editor({ data, onChange, readOnly = false }) {
   //   }
   // }, [data]);
 
-  return <div ref={editorRef} className="prose max-w-none" />;
+  return <div id="editorjs" ref={editorRef} className="prose max-w-none" />;
 }
 
 export default Editor;

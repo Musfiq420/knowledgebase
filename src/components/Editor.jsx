@@ -13,6 +13,7 @@ import Table from '@editorjs/table';
 import LinkTool from '@editorjs/link';
 import './editor.css';
 import LinkPreviewTool from './LinkPreview';
+import MonacoEditorTool from './blocks/MonacoEditorTool.jsx';
 
 const fetchLinkPreview = async (url) => {
   try {
@@ -96,12 +97,16 @@ const tools = {
       captionPlaceholder: 'Quote author'
     }
   },
-  code: {
-    class: Code,
-    config: {
-      placeholder: 'Enter your code here...'
-    }
+  code: MonacoEditorTool, // Use the new Monaco Editor tool
+  delimiter: {
+    class: Delimiter,
   },
+  // {
+  //   class: Code,
+  //   config: {
+  //     placeholder: 'Enter your code here...'
+  //   }
+  // },
   delimiter: {
     class: Delimiter
   },

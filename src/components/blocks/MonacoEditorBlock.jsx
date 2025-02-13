@@ -9,12 +9,45 @@ const LanguageSelector = ({ language, onLanguageChange, readOnly }) => {
       onChange={(e) => onLanguageChange(e.target.value)}
       disabled={readOnly}
     >
-      <option value="javascript">JavaScript</option>
-      <option value="python">Python</option>
-      <option value="java">Java</option>
-      <option value="html">HTML</option>
-      <option value="css">CSS</option>
-      <option value="typescript">TypeScript</option>
+      <option value="bat">Batch</option>
+<option value="c">C</option>
+<option value="cpp">C++</option>
+<option value="csharp">C#</option>
+<option value="css">CSS</option>
+<option value="dockerfile">Dockerfile</option>
+<option value="fsharp">F#</option>
+<option value="go">Go</option>
+<option value="graphql">GraphQL</option>
+<option value="handlebars">Handlebars</option>
+<option value="html">HTML</option>
+<option value="java">Java</option>
+<option value="javascript">JavaScript</option>
+<option value="json">JSON</option>
+<option value="julia">Julia</option>
+<option value="kotlin">Kotlin</option>
+<option value="less">Less</option>
+<option value="lua">Lua</option>
+<option value="markdown">Markdown</option>
+<option value="objective-c">Objective-C</option>
+<option value="pascal">Pascal</option>
+<option value="perl">Perl</option>
+<option value="php">PHP</option>
+<option value="plaintext">Plain Text</option>
+<option value="powershell">PowerShell</option>
+<option value="python">Python</option>
+<option value="r">R</option>
+<option value="razor">Razor (CSHTML)</option>
+<option value="ruby">Ruby</option>
+<option value="rust">Rust</option>
+<option value="scss">SCSS</option>
+<option value="shell">Shell Script</option>
+<option value="sql">SQL</option>
+<option value="swift">Swift</option>
+<option value="typescript">TypeScript</option>
+<option value="vb">VB.NET</option>
+<option value="xml">XML</option>
+<option value="yaml">YAML</option>
+
     </select>
   );
 };

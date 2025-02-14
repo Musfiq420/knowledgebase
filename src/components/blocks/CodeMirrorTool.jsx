@@ -173,26 +173,31 @@ export default class CodeEditorBlock {
             }}
             onBeforeChange={(_, __, value) => setCode(value)}
             editorDidMount={(editor) => {
-                editor.on("keydown", (cm, event) => {
-                  event.stopPropagation(); // Prevents Editor.js from interfering
-              
-                  if (event.key === "Backspace") {
-                    const cursor = cm.getCursor();
-                    if (cursor.ch === 0 && cursor.line === 0) {
-                      event.preventDefault(); // Stops Editor.js from deleting the block
-                    }
+              editor.on("keydown", (cm, event) => {
+                event.stopPropagation(); // Prevent Editor.js from handling backspace
+            
+                if (event.key === "Backspace") {
+                  const cursor = cm.getCursor();
+            
+                  // If at the start of a line (but not the first line)
+                  if (cursor.ch === 0 && cursor.line > 0) {
+                    event.preventDefault(); // Prevent block deletion
+                    cm.replaceRange("", { line: cursor.line - 1, ch: cm.getLine(cursor.line - 1).length }, cursor);
+                    cm.setCursor({ line: cursor.line - 1, ch: cm.getLine(cursor.line - 1).length });
                   }
-                });
-              
-                // Ensure focus stays on mobile when using Backspace
-                editor.on("blur", () => {
-                  setTimeout(() => {
-                    if (document.activeElement.tagName === "BODY") {
-                      cm.focus();
-                    }
-                  }, 100);
-                });
-              }}
+                }
+              });
+            
+              // Prevent losing focus on mobile
+              editor.on("blur", () => {
+                setTimeout(() => {
+                  if (document.activeElement.tagName === "BODY") {
+                    cm.focus();
+                  }
+                }, 100);
+              });
+            }}
+            
               
           />
         </div>

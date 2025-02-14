@@ -168,15 +168,32 @@ export default class CodeEditorBlock {
               theme: "dracula",
               lineNumbers: true,
               tabSize: 2,
-              readOnly: this.readOnly
+              readOnly: this.readOnly,
+              
             }}
             onBeforeChange={(_, __, value) => setCode(value)}
             editorDidMount={(editor) => {
-                // Prevent Editor.js from handling Backspace & Enter inside CodeMirror
                 editor.on("keydown", (cm, event) => {
-                  event.stopPropagation(); // Stops Editor.js from listening
+                  event.stopPropagation(); // Prevents Editor.js from interfering
+              
+                  if (event.key === "Backspace") {
+                    const cursor = cm.getCursor();
+                    if (cursor.ch === 0 && cursor.line === 0) {
+                      event.preventDefault(); // Stops Editor.js from deleting the block
+                    }
+                  }
+                });
+              
+                // Ensure focus stays on mobile when using Backspace
+                editor.on("blur", () => {
+                  setTimeout(() => {
+                    if (document.activeElement.tagName === "BODY") {
+                      cm.focus();
+                    }
+                  }, 100);
                 });
               }}
+              
           />
         </div>
       );

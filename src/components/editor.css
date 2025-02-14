@@ -40,6 +40,7 @@ h6 {
 
   .ce-block__content {
     margin-left: 0px;
+    max-width: none;
   }
 
   /* .ce-toolbar {

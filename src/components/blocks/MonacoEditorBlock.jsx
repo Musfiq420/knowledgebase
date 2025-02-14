@@ -89,6 +89,18 @@ const MonacoEditorBlock = ({ data, readOnly, onEditorReady, onLanguageChange }) 
           fontSize: 14,
           lineNumbers: 'off',
           folding: false,
+          scrollBeyondLastLine: false,
+          scrollbar: {
+            vertical: 'hidden',
+            horizontal: 'hidden',
+          },
+          overviewRulerLanes: 0,
+          hideCursorInOverviewRuler: true,
+          glyphMargin: false,
+          lineDecorationsWidth: 0,
+          lineNumbersMinChars: 0,
+          renderLineHighlight: 'none',
+          wordWrap: 'on',
         }}
         onMount={handleEditorDidMount}
       />

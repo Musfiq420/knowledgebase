@@ -88,6 +88,7 @@ const MonacoEditorBlock = ({ data, readOnly, onEditorReady, onLanguageChange }) 
           minimap: { enabled: false },
           fontSize: 14,
           lineNumbers: 'off',
+          folding: false,
         }}
         onMount={handleEditorDidMount}
       />

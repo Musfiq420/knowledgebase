@@ -15,6 +15,7 @@ import './editor.css';
 import LinkPreviewTool from './LinkPreview';
 import MonacoEditorTool from './blocks/MonacoEditorTool.jsx';
 import CodeEditorBlock from "./blocks/CodeMirrorTool.jsx";
+import CodeEditorTool from './blocks/AceEditor.jsx';
 
 const fetchLinkPreview = async (url) => {
   try {
@@ -98,7 +99,7 @@ const tools = {
       captionPlaceholder: 'Quote author'
     }
   },
-  code: {class: CodeEditorBlock}, // Use the new Monaco Editor tool
+  code: CodeEditorTool, // Use the new Monaco Editor tool
   // delimiter: {
   //   class: Delimiter,
   // },

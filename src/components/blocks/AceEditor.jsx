@@ -61,10 +61,19 @@
 
 import React, { useState, useRef } from "react";
 import AceEditor from "react-ace";
+
+// Import Ace Editor modes (Add more if needed)
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/mode-sh";
+
+
+// Import Ace Editor themes
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
+import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-dracula";
+
 import { createRoot } from "react-dom/client";
 
 export default class CodeEditorTool {
@@ -89,11 +98,18 @@ export default class CodeEditorTool {
     // React Component
     const CodeEditorComponent = () => {
       const [code, setCode] = useState(this.data.code);
+      const [language, setLanguage] = useState(this.data.language);
       const editorRef = useRef(null);
 
       const handleChange = (newValue) => {
         setCode(newValue);
         this.data.code = newValue;
+      };
+
+      const handleLanguageChange = (e) => {
+        const newLanguage = e.target.value;
+        setLanguage(newLanguage);
+        this.data.language = newLanguage;
       };
 
       const copyToClipboard = () => {
@@ -102,11 +118,29 @@ export default class CodeEditorTool {
       };
 
       return (
-        <div style={{ position: "relative", border: "1px solid #333", borderRadius: "5px" }}>
+        <div style={{ position: "relative", border: "1px solid lightgray", borderRadius: "5px", marginTop:"10px" }}>
+            
+            <select
+              value={language}
+              disabled={this.readOnly}
+              onChange={handleLanguageChange}
+              style={{
+                marginBottom: "5px",
+                padding: "5px",
+                borderRadius: "5px",
+                // border: "1px solid #ccc",
+              }}
+            >
+              <option value="javascript">JavaScript</option>
+              <option value="python">Python</option>
+              <option value="sh">Shell</option>
+            </select>
+          
+
           <AceEditor
             ref={editorRef}
-            mode={this.data.language}
-            theme="monokai"
+            mode={language}
+            theme="dracula"
             value={code}
             onChange={handleChange}
             fontSize={14}
@@ -116,6 +150,7 @@ export default class CodeEditorTool {
             showPrintMargin={false}
             highlightActiveLine={!this.readOnly}
             setOptions={{ useWorker: false }}
+            showGutter={false}
           />
 
           {/* Copy Button */}

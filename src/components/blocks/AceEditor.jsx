@@ -145,7 +145,7 @@ export default class CodeEditorTool {
             onChange={handleChange}
             fontSize={14}
             width="100%"
-            height="200px"
+            // height="200px"
             readOnly={this.readOnly}
             showPrintMargin={false}
             highlightActiveLine={!this.readOnly}

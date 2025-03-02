@@ -17,7 +17,7 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('https://knowledgebase-xi.vercel.app/token/');
     setIsLoggedIn(!!token);
   }, []);
 
@@ -31,7 +31,7 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('https://knowledgebase-xi.vercel.app/token/');
     setIsLoggedIn(false);
   };
 

@@ -9,7 +9,7 @@ function Login({ onLoginSuccess }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('https://knowledgebase-xi.vercel.app/token/');
     if (token) {
       navigate('/dashboard');
     }
@@ -20,7 +20,7 @@ function Login({ onLoginSuccess }) {
     try {
       const response = await login(username, password);
 
-      localStorage.setItem('token', response.token);
+      localStorage.setItem('https://knowledgebase-xi.vercel.app/token/', response.token);
       toast.success('Login successful!');
       onLoginSuccess();
       navigate('/dashboard');

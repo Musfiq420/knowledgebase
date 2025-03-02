@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu } from '@headlessui/react';
-import { PlusIcon, ChevronDownIcon, ChevronRightIcon, PencilIcon, TrashIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, ChevronDownIcon, ChevronRightIcon, PencilIcon, TrashIcon, Bars3Icon, XMarkIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { getNotebooks, createNotebook, getCategories, createCategory, updateCategory, deleteCategory } from '../services/api';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -189,7 +189,7 @@ function Sidebar({ onCategorySelect, selectedNotebook, setSelectedNotebook, sele
                   
                   <span>{category.name}</span>
                 </button>
-                <div className="flex items-center space-x-2">
+                {isEditingCategory?<div className="flex items-center space-x-2">
                   <button
                     onClick={() => openEditCategoryModal(category)}
                     className="p-1 text-gray-600 hover:text-indigo-600"
@@ -208,7 +208,7 @@ function Sidebar({ onCategorySelect, selectedNotebook, setSelectedNotebook, sele
                   >
                     <PlusIcon className="w-4 h-4" />
                   </button>
-                </div>
+                </div>:null}
               </div>
               {renderCategories(category.id)}
             </li>
@@ -304,12 +304,29 @@ function Sidebar({ onCategorySelect, selectedNotebook, setSelectedNotebook, sele
           <div>
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-lg font-semibold">Categories</h3>
+              <div className='flex'>
+
+              {isEditingCategory?
               <button
+              onClick={() => setIsEditingCategory(false)}
+              className="p-1 text-gray-600 hover:text-indigo-600"
+            >
+              <CheckIcon className="w-4 h-4" />
+            </button>:
+              <button
+                    onClick={() => setIsEditingCategory(true)}
+                    className="p-1 text-gray-600 hover:text-indigo-600"
+                  >
+                    <PencilIcon className="w-4 h-4" />
+                  </button>}
+            {isEditingCategory?<button
                 onClick={() => openAddCategoryModal(null)}
                 className="px-2 py-1 text-xs text-gray-600 hover:text-indigo-600"
               >
                 <PlusIcon className="w-4 h-4" />
-              </button>
+              </button>:null}
+              </div>
+              
             </div>
             {renderCategories()}
           </div>

@@ -14,6 +14,7 @@ import './editor.css';
 import LinkPreviewTool from './LinkPreview';
 import CodeEditorTool from './blocks/AceEditor.jsx';
 import DropboxAudioBlock from './blocks/DropboxAudio.jsx';
+import WebviewEmbedBlock from './blocks/WebView.jsx';
 
 const fetchLinkPreview = async (url) => {
   try {
@@ -119,6 +120,7 @@ const tools = {
     shortcut: 'CMD+SHIFT+C'
   },
   dropboxAudio: DropboxAudioBlock,
+  webview: WebviewEmbedBlock,
   table: {
     class: Table,
     inlineToolbar: true,

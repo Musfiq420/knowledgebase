@@ -8,12 +8,12 @@ function Login({ onLoginSuccess }) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem('https://knowledgebase-xi.vercel.app/token/');
-    if (token) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('https://knowledgebase-xi.vercel.app/token/');
+  //   if (token) {
+  //     navigate('/dashboard');
+  //   }
+  // }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

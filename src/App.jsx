@@ -9,17 +9,41 @@ import PrivateRoute from './components/PrivateRoute';
 import Sidebar from './components/Sidebar';
 import NewArticle from './pages/NewArticle';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { verifyToken } from './services/api';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedNotebook, setSelectedNotebook] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  
 
   useEffect(() => {
-    const token = localStorage.getItem('https://knowledgebase-xi.vercel.app/token/');
-    setIsLoggedIn(!!token);
+    const checkTokenValidity = async () => {
+      const token = localStorage.getItem('https://knowledgebase-xi.vercel.app/token/');
+      
+      if (!token) {
+        setIsLoggedIn(false);
+        setIsLoading(false);
+        return;
+      }
+  
+      try {
+        
+        const response = await verifyToken();
+        setIsLoggedIn(true);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Token verification failed', error);
+        localStorage.removeItem('https://knowledgebase-xi.vercel.app/token/');
+        setIsLoggedIn(false);
+      }
+    };
+  
+    checkTokenValidity();
   }, []);
+  
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
@@ -77,7 +101,7 @@ function App() {
           }`}
         >
           <Routes>
-            <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+            <Route path="/login" element={!isLoading && (isLoggedIn ? <Navigate to="/dashboard" replace /> : <Login onLoginSuccess={handleLoginSuccess} />)}/>
             <Route path="/register" element={<Register />} />
             <Route
               path="/dashboard"
@@ -89,8 +113,8 @@ function App() {
             />
             <Route path="/article/:articleId" element={<Article />} />
             <Route path="/article/new" element={<NewArticle selectedCategory={selectedCategory} selectedNotebook={selectedNotebook} />} />
-            <Route path="/" element={isLoggedIn ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />} />
-          </Routes>
+            <Route path="/" element={!isLoading && (isLoggedIn ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />)} />
+            </Routes>
         </div>
       </div>
     </Router>

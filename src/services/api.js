@@ -20,17 +20,19 @@ const fetchAPI = async (url, options = {}) => {
   return response.json();
 };
 
-export const login = async (username, password) => {
-  return await fetchAPI('/login/', {
-    method: 'POST',
-    body: JSON.stringify({ username, password }),
-  });
-};
+export const verifyToken = async () => await fetchAPI('/auth/verify/');
 
 export const register = async (username, email, password) => {
   return await fetchAPI('/register/', {
     method: 'POST',
     body: JSON.stringify({ username, email, password }),
+  });
+};
+
+export const login = async (username, password) => {
+  return await fetchAPI('/login/', {
+    method: 'POST',
+    body: JSON.stringify({ username, password }),
   });
 };
 

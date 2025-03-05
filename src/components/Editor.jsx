@@ -10,12 +10,10 @@ import Delimiter from '@editorjs/delimiter';
 import Marker from '@editorjs/marker';
 import InlineCode from '@editorjs/inline-code';
 import Table from '@editorjs/table';
-import LinkTool from '@editorjs/link';
 import './editor.css';
 import LinkPreviewTool from './LinkPreview';
-import MonacoEditorTool from './blocks/MonacoEditorTool.jsx';
-import CodeEditorBlock from "./blocks/CodeMirrorTool.jsx";
 import CodeEditorTool from './blocks/AceEditor.jsx';
+import DropboxAudioBlock from './blocks/DropboxAudio.jsx';
 
 const fetchLinkPreview = async (url) => {
   try {
@@ -120,6 +118,7 @@ const tools = {
     class: InlineCode,
     shortcut: 'CMD+SHIFT+C'
   },
+  dropboxAudio: DropboxAudioBlock,
   table: {
     class: Table,
     inlineToolbar: true,

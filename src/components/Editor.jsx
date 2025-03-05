@@ -13,8 +13,8 @@ import Table from '@editorjs/table';
 import './editor.css';
 import LinkPreviewTool from './LinkPreview';
 import CodeEditorTool from './blocks/AceEditor.jsx';
-import DropboxAudioBlock from './blocks/DropboxAudio.jsx';
 import WebviewEmbedBlock from './blocks/WebView.jsx';
+import MegaEmbedBlock from './blocks/MegaEmbed.jsx';
 
 const fetchLinkPreview = async (url) => {
   try {
@@ -119,7 +119,7 @@ const tools = {
     class: InlineCode,
     shortcut: 'CMD+SHIFT+C'
   },
-  dropboxAudio: DropboxAudioBlock,
+  megaembed: MegaEmbedBlock,
   webview: WebviewEmbedBlock,
   table: {
     class: Table,

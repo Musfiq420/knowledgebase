@@ -1,9 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { handleGoogleLogin } from '../services/api';
 
+const handleGoogleLogin = async (accessToken) => {
 
+      const response = await fetch(`https://knowledgebase-django-api.onrender.com/google/login/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ access_token: accessToken }),
+      });
+
+      const data = await response.json();
+      return data
+
+}
 
 function Login({ onLoginSuccess }) {
   const [user, setUser] = useState(null);

@@ -27,18 +27,10 @@ function App() {
         setIsLoggedIn(false);
         setIsLoading(false);
         return;
+      } else {
+        setIsLoggedIn(true);
       }
   
-      try {
-        
-        const response = await verifyToken();
-        setIsLoggedIn(true);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Token verification failed', error);
-        localStorage.removeItem('https://knowledgebase-xi.vercel.app/token/');
-        setIsLoggedIn(false);
-      }
     };
   
     checkTokenValidity();

@@ -1,11 +1,13 @@
-const API_BASE_URL = 'https://knowledgebase-django-api.onrender.com/api';
+const API_BASE_URL = 'https://knowledgebase-django-api.onrender.com';
+// const API_BASE_URL = 'http://127.0.0.1:8000';
 
 const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('https://knowledgebase-xi.vercel.app/token/');
   return token ? { Authorization: `Token ${token}` } : {};
 };
 
 const fetchAPI = async (url, options = {}) => {
+  
   const response = await fetch(`${API_BASE_URL}${url}`, {
     headers: {
       'Content-Type': 'application/json',
@@ -14,10 +16,12 @@ const fetchAPI = async (url, options = {}) => {
     },
     ...options,
   });
+  
   if (!response.ok) {
     throw new Error(`Error: ${response.status}`);
   }
-  return response.json();
+  const result = await response.json()
+  return result;
 };
 
 export const verifyToken = async () => await fetchAPI('/auth/verify/');
@@ -35,6 +39,15 @@ export const login = async (username, password) => {
     body: JSON.stringify({ username, password }),
   });
 };
+
+export const handleGoogleLogin = async (accessToken) => {
+
+      return await fetchAPI(`/google/login/`, {
+        method: "POST",
+        body: JSON.stringify({ access_token: accessToken }),
+      });
+
+}
 
 export const getNotebooks = async () => await fetchAPI('/notebooks/');
 
